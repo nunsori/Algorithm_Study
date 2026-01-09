@@ -2,6 +2,17 @@
 
 using namespace std;
 
+long long Mul(long long ex, long long A, long long C){
+    if(ex == 0) return 1 % C;
+    if(ex == 1) return A % C;
+
+    long long sample = Mul(ex / 2, A, C);
+    long long square = (((sample % C) * (sample % C)) % C);
+
+    return ((square % C) * ((ex % 2) ? (A % C) : 1) % C);
+
+}
+
 void ResetBuffer(){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
@@ -9,10 +20,10 @@ void ResetBuffer(){
 }
 
 int main(){
-    int N, K;
+    long long N, K;
 
-    int R = 1000000007;
-    int total = 1;
+    long long R = 1000000007;
+    long long total = 1;
 
     cin >> N >> K;
 
@@ -25,13 +36,19 @@ int main(){
         total = ((total % R) * (((N - i) % R))) % R;
     }
 
-    int fac = 1;
+    long long fac = 1;
 
     for(int i = 1; i < K + 1; i++){
-        fac 
+        fac = ((fac % R) * (i % R)) % R;
     }
 
-    cout << total;
+    if(K == 0){
+        cout << 1;
+    }else{
+        cout << ((total % R) * (Mul(R - 2, fac, R) % R)) % R;
+    }
+
+    //cout << total;
 
 
     return 0;
