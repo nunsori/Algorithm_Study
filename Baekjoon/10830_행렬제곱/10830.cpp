@@ -54,7 +54,15 @@ int** MatrixMultiplication(int** arr1, int**arr2, int N1, int M1, int N2, int M2
 
 int** Mul(long long ex, int** arr1, int N, int** origin){
     if(ex == 0) return NULL;
-    if(ex == 1) return arr1;
+    if(ex == 1){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                arr1[i][j] %= 1000;
+            }
+        }
+
+        return arr1;
+    }
 
     int** sample = Mul(ex / 2, arr1, N, origin);
     int** square = MatrixMultiplication(sample, sample, N, N, N, N);
