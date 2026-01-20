@@ -1,0 +1,6 @@
+2) qArr.top().pop()이 안 되는 이유 (top은 const reference)
+
+priority_queue::top()은 const reference를 반환해.
+그래서 qArr.top().pop(); 처럼 내부 pq를 수정(pop)하려고 하면 원래는 컴파일 에러가 나야 정상.
+
+즉 “바깥 pq의 top 원소(내부 pq)를 꺼내서 수정한 뒤 다시 넣어야” 해.
